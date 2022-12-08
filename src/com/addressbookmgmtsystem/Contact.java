@@ -108,5 +108,12 @@ public class Contact {
         this.phoneNum = phoneNum;
         this.email = email;
     }
+    @Override
+    public String toString() {
+        return "Contact{" + "FirstName='" + fName + '\'' + "MiddleName='" + fName + '\''+
+                ", LastName='" + lName + '\'' + ", address='" + add +
+                '\'' +"City='" + city + '\'' +"State='" + state + '\'' +"PinCode='" + pinCode +
+                '\'' +"PhoneNumber='" + phoneNum+ '\'' +"Email Id ='" + email + '\'' + '}';
+    }
 
 }

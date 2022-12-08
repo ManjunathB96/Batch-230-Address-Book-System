@@ -1,5 +1,6 @@
 package com.addressbookmgmtsystem;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class AddressBookMgmtSys {
@@ -12,17 +13,30 @@ public class AddressBookMgmtSys {
         System.out.println("Welcome to Address Book Management System..!");
         System.out.println();
 
-        sys.addEditDeleteFindContact();
+        sys.contactImplOperations();
     }
 
-    public void addEditDeleteFindContact() {
+    public void contactImplOperations() {
         boolean isExist = false;
         while (!isExist) {
-            System.out.println("Please Select Option\n1.addContact");
+            System.out.println("Please Select Option\n1.addContact\n2. edit contact");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
                     addContact();
+                    break;
+                case 2:
+                    System.out.println("Enter name to edit");
+                    String name = scanner.nextLine();
+                    int contactIndex = findContactByName(name);
+                    System.out.println(contactIndex);
+                    if (contactIndex == -1) {
+                        System.out.println("Contact not found with name: " + name);
+                    } else {
+                        Contact contact = editContact(contacts[contactIndex]);
+                        contacts[contactIndex] = contact;
+                    }
+                    System.out.println(Arrays.toString(contacts));
                     break;
                 default:
                     System.out.println("Invalid Choice Please Select Valid Option...!");
@@ -72,5 +86,21 @@ public class AddressBookMgmtSys {
         }
         System.out.println("Contact List is Full No Space For New Contacts");
         return contact;
+    }
+    private static Contact editContact(Contact contact) {
+        System.out.println("Edit first name");
+        contact.setfName(scanner.nextLine());
+        return contact;
+    }
+    private static int findContactByName(String name) {
+        for (int i = 0; i < contacts.length; i++) {
+            if (contacts[i] != null) {
+                if (contacts[i].getfName().equals(name) ||
+                        contacts[i].getlName().equals(name)) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 }
